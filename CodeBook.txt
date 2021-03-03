@@ -1,0 +1,68 @@
+The file "run_analysis.R" tidies and cleans the dataset "UCI HAR Dataset" as part of the assignment "getting-and-cleaning-data-course-project"
+
+This code will carry out the following steps:
+         1. Merges the training and the test sets to create one data set.
+         2. Extracts only the measurements on the mean and standard deviation for each measurement. 
+         3. Uses descriptive activity names to name the activities in the data set
+         4. Appropriately labels the data set with descriptive variable names. 
+	 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+ 
+Read training data
+	x_train -> training data x
+	y_train -> training data y
+	sub_train -> training data subject
+
+Read test data
+	x_test -> test data x
+	y_test -> test data y
+	sub_test -> test data subject
+
+Read activity label and feature data
+	act_labels -> data of activity labels
+	features -> data of features
+
+Uses descriptive activity names to name the activities in the data set (3.)
+Use labels to name the subject data
+Assign feature name to columns of x data
+Assign activity number as label of y data
+
+Create matrices for training and test data
+	mat_train ->  matrix with training data
+	mat_test -> matrix with test data
+
+Combine training and test data as a matrix
+	mat_comb -> matrix with training and test data
+
+Merges the training and the test sets to create one data set (1.)
+	dataset1 -> merged data by activity number
+
+Sort the merged dataset by subject and adjust row order
+
+
+Use dplyr library
+Extracts only the measurements on the mean and standard deviation for each measurement (2.)
+Appropriately labels the data set with descriptive variable names --> this was mainly performed after step 3 (line 31) (4.)
+	dataset1_sub1 -> extractation of all columns of dataset1 with names containing "mean" or "std"
+	dataset2 -> combination of the first three columns of dataset1 and dataset1_sub1
+
+From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject. (5.)
+Get column names of dataset2 with only mean and std rows
+	c_names -> column names of dataset2
+
+Split the dataset by subject and activity name 
+	dataset2_split -> splitted dataset2 by subject and activity name
+
+Function to calculate the column mean while retaining the first three columns (subject, activity name, activity number)
+	columnmean -> function for calculating rowmeans while keeping the first 3 columns
+	r1 -> temp variable for storing first row first column value of input matrix
+ 	r2 -> temp variable for storing first row second column value of input matrix
+ 	r3 -> temp variable for storing first row second column value of input matrix
+ 	r4 -> calculating means of rows for columns with names of c_name for input matrix
+ 	comb -> combining r1,r2,r3 and r4
+
+Create tidy dataset with means of the numeric columns
+	dataset_tidy -> dataset with rowmeans of dataset2_split
+
+Write tidy dataset to .txt file
+
+Read-in the written tidy dataset
